@@ -1,5 +1,5 @@
 {
-    "name": "suraj/mvc-scaffolding",
+    "name": "codelikesuraj/php-mvc-template",
     "type": "project",
     "autoload": {
         "psr-4": {
