@@ -2,6 +2,7 @@
 
 // abort execution with status code
 
+use Core\Validation\Validator;
 use Core\View;
 
 if (!function_exists('abort')) {
@@ -61,5 +62,12 @@ if (!function_exists('get_config_from_file')) {
     {
         $config_file = __DIR__ . '/config.php';
         return file_exists($config_file) ? require_once($config_file) : [];
+    }
+}
+
+// helper functon to access validator class
+if (!function_exists('validator')) {
+    function validator() {
+        return (new Validator());
     }
 }
