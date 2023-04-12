@@ -1,7 +1,7 @@
 <?php
 
 use App\Controllers\GreetController;
-use App\Helpers\Route;
+use Core\Route;
 
 return [
     /*
@@ -16,4 +16,7 @@ return [
         echo 'Hello there, hope you are having a great day!';
     }),
     Route::get('/greet/{:name}', [GreetController::class, 'byName']),
+    Route::get('/env', function () {
+        echo config('app.name');
+    }),
 ];

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers;
+namespace Core;
 
 class View
 {
@@ -12,7 +12,7 @@ class View
     public function __construct(string $file, array $with = [])
     {
         // parse view file separated by '.'
-        $filePath = self::DIR . '/../Views/' . $this->toFilePath($file) . self::EXT;
+        $filePath = self::DIR . '/../app/Views/' . $this->toFilePath($file) . self::EXT;
 
         if (!file_exists($filePath)) {
             throw new \Exception("View '{$file}' not found ");
