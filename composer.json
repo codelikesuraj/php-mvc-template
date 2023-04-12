@@ -1,0 +1,16 @@
+{
+    "name": "suraj/mvc-scaffolding",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Abdulbaki Adabara Suraj",
+            "email": "codelikesuraj@gmail.com"
+        }
+    ],
+    "require": {}
+}
