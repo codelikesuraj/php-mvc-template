@@ -1,7 +1,5 @@
 <?php
 
-// abort execution with status code
-
 use Core\Validation\Validator;
 use Core\View;
 
@@ -60,7 +58,7 @@ if (!function_exists('config')) {
 if (!function_exists('get_config_from_file')) {
     function get_config_from_file()
     {
-        $config_file = __DIR__ . '/config.php';
+        $config_file = __DIR__ . '/../app/Config/config.php';
         return file_exists($config_file) ? require($config_file) : [];
     }
 }
