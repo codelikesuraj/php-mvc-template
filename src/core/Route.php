@@ -61,9 +61,7 @@ class Route
         // confirm current route is set
         // TODO: check the request method also
         if (!$this->routeIsDefined($currentRoute)) {
-            header("HTTP/1.0 404 Not Found");
-            die('ERROR 404: Page not found');
-            return;
+            abort(404);
         }
 
         // resolve middleware

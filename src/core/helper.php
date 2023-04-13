@@ -1,13 +1,20 @@
 <?php
 
+use Core\Request;
+use Core\Response;
 use Core\Validation\Validator;
 use Core\View;
 
 if (!function_exists('abort')) {
     function abort($code = 404)
     {
-        header("HTTP/1.0 404 Not Found");
-        die('ERROR 404: Page not found');
+        if (request()->isJson()) {
+            response()->json()->setStatusCode(404)->send();
+        } else {
+            View::display(view('errors.' . $code));
+        }
+
+        exit();
     }
 }
 
@@ -23,7 +30,7 @@ if (!function_exists('view')) {
 if (!function_exists('env')) {
     function env($key = null, $default = null)
     {
-        if(is_null($key)) {
+        if (is_null($key)) {
             return $_ENV;
         }
 
@@ -41,15 +48,15 @@ if (!function_exists('config')) {
     {
         $key = str_replace('.', '_', trim($key));
         $config = get_config_from_file();
-        
+
         if (is_null($key)) {
             return $config;
         }
-        
+
         if (array_key_exists($key, $config)) {
             return $config[$key];
         }
-        
+
         return $default;
     }
 }
@@ -65,7 +72,38 @@ if (!function_exists('get_config_from_file')) {
 
 // helper functon to access validator class
 if (!function_exists('validator')) {
-    function validator() {
+    function validator()
+    {
         return (new Validator());
+    }
+}
+
+// helper function to dump content
+if (!function_exists('dd')) {
+    function dd($data = "", $exit = true)
+    {
+        echo '<pre>';
+        var_dump($data);
+        echo '</pre>';
+
+        if ($exit) {
+            exit();
+        }
+    }
+}
+
+// helper function to access the Request instance
+if (!function_exists('request')) {
+    function request()
+    {
+        return new Request;
+    }
+}
+
+// helper function to access the Response instance
+if (!function_exists('response')) {
+    function response()
+    {
+        return new Response;
     }
 }
