@@ -29,4 +29,11 @@ class Session
         session_reset();
     }
 
+    public function delete($key)
+    {
+        if ($this->has($key)) {
+            unset($_SESSION[$key]);
+        }
+    }
+
 }
