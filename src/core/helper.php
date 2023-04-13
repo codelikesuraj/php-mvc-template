@@ -1,5 +1,6 @@
 <?php
 
+use Core\Auth;
 use Core\Request;
 use Core\Response;
 use Core\Session;
@@ -145,5 +146,13 @@ if (!function_exists('session')) {
     function session()
     {
         return new Session;
+    }
+}
+
+// helper function to access the Auth class
+if (!function_exists('auth')) {
+    function auth()
+    {
+        return new Auth;
     }
 }
