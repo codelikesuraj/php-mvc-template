@@ -4,6 +4,7 @@ use Core\Request;
 use Core\Response;
 use Core\Validation\Validator;
 use Core\View;
+use Illuminate\Database\Capsule\Manager;
 
 if (!function_exists('abort')) {
     function abort($code = 404)
@@ -42,6 +43,27 @@ if (!function_exists('env')) {
     }
 }
 
+if (!function_exists('schema')) {
+    function schema()
+    {
+        return new Manager();
+    }
+}
+
+// helper for getting specific database variables
+if (!function_exists('database')) {
+    function database(string $key = null)
+    {
+        $database = get_database_from_file();
+
+        if (array_key_exists($key, $database)) {
+            return $database[$key];
+        }
+
+        return $database;
+    }
+}
+
 // helper for getting specific config variables
 if (!function_exists('config')) {
     function config($key = null, $default = null)
@@ -58,6 +80,15 @@ if (!function_exists('config')) {
         }
 
         return $default;
+    }
+}
+
+// helper for loading all database connections
+if (!function_exists('get_database_from_file')) {
+    function get_database_from_file()
+    {
+        $database_file = __DIR__ . '/../app/Config/database.php';
+        return file_exists($database_file) ? require($database_file) : [];
     }
 }
 

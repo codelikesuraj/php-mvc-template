@@ -13,15 +13,11 @@ require_once(__DIR__ . "/../src/core/helper.php");
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../");
 $dotenv->safeLoad();
 
-// load schema
-$schema = new Manager();
-$schema->addConnection([
-    "driver" => "mysql",
-    "host" => config('db.host'),
-    "database" => config('db.database'),
-    "username" => config('db.username'),
-    "password" => config('db.password')
-]);
+// load schema/database configurations
+$schema = new Manager;
+foreach(database() as $key => $value) {
+    $schema->addConnection($value, $key);
+}
 $schema->setAsGlobal();
 $schema->bootEloquent();
 
