@@ -64,6 +64,17 @@ class Route
             abort(404);
         }
 
+        // check csrf_token for post requests
+        if (strtolower(request()->getMethod()) == 'post' && !request()->isJson()) {
+            if (!session()->has('csrf_token')) {
+                abort();
+            }
+
+            if (request()->input('csrf_token') !== session()->get('csrf_token')) {
+                abort();
+            }
+        }
+        
         // resolve middleware
         (new Middleware())->resolve($this->handlers[$currentRoute]['middleware']);
 

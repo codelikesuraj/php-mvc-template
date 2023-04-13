@@ -16,8 +16,26 @@ class Request
 
     public function isJson()
     {
-        $content_type = strtolower($this->request->headers->get('Content-Type') ?? '');
+        return in_array('application/json', $this->request->getAcceptableContentTypes());
+    }
 
-        return strpos($content_type, 'application/json') !== false;
+    public function getMethod()
+    {
+        return $this->request->getMethod();
+    }
+
+    public function input($key = null)
+    {
+        $all = $this->request->request->all();
+        
+        if(is_null($key) || empty(trim($key))) {
+            return $all;
+        }
+
+        if (array_key_exists($key, $all)) {
+            return $all[$key];
+        }
+
+        return $all;
     }
 }

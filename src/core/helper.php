@@ -156,3 +156,12 @@ if (!function_exists('auth')) {
         return new Auth;
     }
 }
+
+if (!function_exists('csrf_token')) {
+    function csrf_token()
+    {
+        $token = md5(uniqid(rand(), true));
+        session()->set('csrf_token', $token);
+        return $token;
+    }
+}
