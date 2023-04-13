@@ -8,9 +8,9 @@ class Example extends Model
 {   
     // protected $connection = 'default';
 
-    // protected $table = 'table_name';
+    // protected $table = 'example_table';
 
-    protected $fillable = ['first_name', 'last_name'];
+    // protected $fillable = ['example_column_1', 'example_column_2'];
 
-    public $timestamps = false;
+    // public $timestamps = false;
 }

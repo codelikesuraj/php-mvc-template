@@ -7,5 +7,5 @@
  */
 
 return [
-    // 'middleware_name' => \App\Config\Middleware\Middleware::class
+    // 'example' => \App\Middleware\Example::class
 ];
