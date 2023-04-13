@@ -15,6 +15,7 @@
     ],
     "require": {
         "vlucas/phpdotenv": "^5.5",
-        "illuminate/validation": "^10.7"
+        "illuminate/validation": "^10.7",
+        "illuminate/database": "^10.7"
     }
 }

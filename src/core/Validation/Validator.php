@@ -8,6 +8,15 @@ use Illuminate\Filesystem\Filesystem;
 
 class Validator
 {
+    /*
+     * IMPORTANT NOTE:
+     * Since this class is not bounded to the
+     * database, avoid any validation rule
+     * that may involve accessing the
+     * database. E.g
+     * 'unique', 'exists' etc;
+     */
+
     private $factory;
 
     public function __construct()

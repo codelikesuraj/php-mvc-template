@@ -61,7 +61,7 @@ if (!function_exists('get_config_from_file')) {
     function get_config_from_file()
     {
         $config_file = __DIR__ . '/config.php';
-        return file_exists($config_file) ? require_once($config_file) : [];
+        return file_exists($config_file) ? require($config_file) : [];
     }
 }
 
