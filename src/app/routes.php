@@ -10,7 +10,11 @@ return [
      * At the moment, only POST & GET
      * have been taken into
      * consideration.
+     * 
+     * USAGE
+     * Route::method(path, callback, middleware),
      */
+
     Route::get('/', view('welcome')),
     Route::get('/greet', function () {
         echo 'Hello there, hope you are having a great day!';

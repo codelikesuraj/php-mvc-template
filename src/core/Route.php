@@ -2,43 +2,48 @@
 
 namespace Core;
 
+use Core\Middleware\Middleware;
+
 class Route
 {
     private array $handlers;
     private const METHOD_POST = 'POST';
     private const METHOD_GET = 'GET';
 
-    public static function get(string $path, $callback): array
+    public static function get(string $path, $callback, $middleware = null): array
     {
         return [
             'method' => self::METHOD_GET,
             'path' => $path,
-            'callback' => $callback
+            'callback' => $callback,
+            'middleware' => $middleware
         ];
     }
 
-    public static function post(string $path, $callback): array
+    public static function post(string $path, $callback, $middleware = null): array
     {
         return [
             'method' => self::METHOD_POST,
             'path' => $path,
-            'callback' => $callback
+            'callback' => $callback,
+            'middleware' => $middleware
         ];
     }
 
-    protected function addHandler(string $method, string $path, $handler): void
+    protected function addHandler(string $method, string $path, $handler, $middleware): void
     {
         $this->handlers[$method . $path] = [
             'handler' => $handler,
             'method' => $method,
-            'path' => $path
+            'path' => $path,
+            'middleware' => $middleware
         ];
     }
 
     public function addRoutes(array $routes): void
     {
         foreach ($routes as $route) {
-            $this->addHandler($route['method'], $route['path'], $route['callback']);
+            $this->addHandler($route['method'], $route['path'], $route['callback'], $route['middleware']);
         }
     }
 
@@ -60,6 +65,9 @@ class Route
             die('ERROR 404: Page not found');
             return;
         }
+
+        // resolve middleware
+        (new Middleware())->resolve($this->handlers[$currentRoute]['middleware']);
 
         $callback = $this->handlers[$currentRoute]['handler'];
 
