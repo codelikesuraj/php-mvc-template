@@ -61,17 +61,17 @@ class Route
         // confirm current route is set
         // TODO: check the request method also
         if (!$this->routeIsDefined($currentRoute)) {
-            abort(404);
+            abort(404, 'Page not found');
         }
 
         // check csrf_token for post requests
-        if (strtolower(request()->getMethod()) == 'post' && !request()->isJson()) {
+        if (strtolower(request()->getMethod()) == 'post') {
             if (!session()->has('csrf_token')) {
-                abort();
+                abort(419, 'Page expired');
             }
 
             if (request()->input('csrf_token') !== session()->get('csrf_token')) {
-                abort();
+                abort(419, 'CSRF token mismatch');
             }
         }
         

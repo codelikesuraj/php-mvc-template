@@ -9,12 +9,12 @@ use Core\View;
 use Illuminate\Database\Capsule\Manager;
 
 if (!function_exists('abort')) {
-    function abort($code = 404)
+    function abort($code = 404, $message = null)
     {
         if (request()->isJson()) {
-            response()->json()->setStatusCode(404)->send();
+            response($message, $code)->json()->send();
         } else {
-            View::display(view('errors.' . $code));
+            View::display(view('errors.' . $code, ['message' => $message]));
         }
 
         exit();
@@ -135,9 +135,9 @@ if (!function_exists('request')) {
 
 // helper function to access the Response instance
 if (!function_exists('response')) {
-    function response()
+    function response($message = null, $code = null)
     {
-        return new Response;
+        return new Response($message, $code);
     }
 }
 
