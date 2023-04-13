@@ -9,6 +9,8 @@ use Illuminate\Database\Capsule\Manager;
 require_once(__DIR__ . "/../vendor/autoload.php");
 require_once(__DIR__ . "/../src/core/helper.php");
 
+session_start();
+
 // load env variables
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../");
 $dotenv->safeLoad();

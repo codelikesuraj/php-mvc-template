@@ -2,6 +2,7 @@
 
 use Core\Request;
 use Core\Response;
+use Core\Session;
 use Core\Validation\Validator;
 use Core\View;
 use Illuminate\Database\Capsule\Manager;
@@ -136,5 +137,13 @@ if (!function_exists('response')) {
     function response()
     {
         return new Response;
+    }
+}
+
+// helper function to access the Session instance
+if (!function_exists('session')) {
+    function session()
+    {
+        return new Session;
     }
 }
